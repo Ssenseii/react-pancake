@@ -1,0 +1,92 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+// Grid Row
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 -#{calc($gutter-width / 2)};
+}
+
+// Option to remove gutters
+.row.no-gutters {
+	margin: 0;
+	> [class*="col-"] {
+		padding: 0;
+	}
+}
+
+// Alignment options for justify-content and align-items
+.row {
+	&.justify-start {
+		justify-content: flex-start;
+	}
+	&.justify-center {
+		justify-content: center;
+	}
+	&.justify-end {
+		justify-content: flex-end;
+	}
+	&.justify-between {
+		justify-content: space-between;
+	}
+	&.justify-around {
+		justify-content: space-around;
+	}
+
+	&.align-start {
+		align-items: flex-start;
+	}
+	&.align-center {
+		align-items: center;
+	}
+	&.align-end {
+		align-items: flex-end;
+	}
+	&.align-stretch {
+		align-items: stretch;
+	}
+}
+
+@include generate-grid-classes();
+@include generate-responsive-grid-classes();
+@include generate-offset-classes();
+@include generate-order-classes();
+
+/* Width and Height System */
+
+// Utility classes for widths
+.w-100 {
+	@include width(100%);
+}
+
+.w-full {
+	@include width(100%);
+}
+
+.w-auto {
+	@include width(auto);
+}
+
+// Add more widths as needed
+.w-50 {
+	@include width(50%);
+}
+
+// Utility classes for heights
+.h-100 {
+	@include height(100%);
+}
+
+.h-full {
+	@include height(100%);
+}
+
+.h-auto {
+	@include height(auto);
+}
+
+// Add more heights as needed
+.h-50 {
+	@include height(50%);
+}

@@ -1,5 +1,139 @@
-@mixin Center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@use "./variables" as *;
+@use 'sass:map';
+
+@mixin Center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Grid system */
+
+// Generate Grid Column Classes Dynamically
+@mixin generate-grid-classes() {
+	@for $i from 1 through $grid-columns {
+		.col-#{i} {
+			width: (calc(100% / $grid-columns)) * $i;
+			padding: 0 calc($gutter-width / 2);
+		}
+	}
+}
+
+// Generate responsive classes like `col-md-6`, `col-lg-4`
+@mixin generate-responsive-grid-classes() {
+	@each $breakpoint, $size in $breakpoints {
+		@for $i from 1 through $grid-columns {
+			.col-#{$breakpoint}-#{$i} {
+				@media (min-width: $size) {
+					width: (calc(100% / $grid-columns)) * $i;
+				}
+			}
+		}
+	}
+}
+
+// Create offset classes (e.g., offset-md-2)
+@mixin generate-offset-classes() {
+	@each $breakpoint, $size in $breakpoints {
+		@for $i from 1 through $grid-columns - 1 {
+			.offset-#{$breakpoint}-#{$i} {
+				@media (min-width: $size) {
+					margin-left: calc((calc(100% / $grid-columns)) * $i);
+				}
+			}
+		}
+	}
+}
+
+// Generate Order Classes
+@mixin generate-order-classes() {
+	@each $breakpoint, $size in $breakpoints {
+		@for $i from 1 through $grid-columns {
+			.order-#{$breakpoint}-#{$i} {
+				@media (min-width: $size) {
+					order: $i;
+				}
+			}
+		}
+		.order-#{$breakpoint}-first {
+			@media (min-width: $size) {
+				order: -1;
+			}
+		}
+		.order-#{$breakpoint}-last {
+			@media (min-width: $size) {
+				order: $grid-columns + 1;
+			}
+		}
+	}
+}
+
+/* Dynamic Width and Height Systems */
+
+// Mixin for width
+
+@mixin width($size) {
+	width: $size;
+}
+
+// Mixin for height
+@mixin height($size) {
+	height: $size;
+}
+
+/* Responsivity in width and height */
+
+/* Media Class */
+
+@mixin media($breakpoint) {
+	@if map.has-key($breakpoints, $breakpoint) {
+		$value: map.get($breakpoints, $breakpoint);
+		@media (min-width: $value) {
+			@content;
+		}
+	}
+}
+
+// Generate utility classes for widths
+@each $breakpoint, $value in $breakpoints {
+	// Width utilities
+	.w-#{$breakpoint}-100 {
+		@include media($breakpoint) {
+			@include width(100%);
+		}
+	}
+
+	.w-#{$breakpoint}-50 {
+		@include media($breakpoint) {
+			@include width(50%);
+		}
+	}
+
+	.w-#{$breakpoint}-auto {
+		@include media($breakpoint) {
+			@include width(auto);
+		}
+	}
+}
+
+// Generate utility classes for heights
+@each $breakpoint, $value in $breakpoints {
+	// Height utilities
+	.h-#{$breakpoint}-100 {
+		@include media($breakpoint) {
+			@include height(100%);
+		}
+	}
+
+	.h-#{$breakpoint}-50 {
+		@include media($breakpoint) {
+			@include height(50%);
+		}
+	}
+
+	.h-#{$breakpoint}-auto {
+		@include media($breakpoint) {
+			@include height(auto);
+		}
+	}
 }

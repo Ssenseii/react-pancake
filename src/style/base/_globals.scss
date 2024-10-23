@@ -1,10 +1,28 @@
-html{
-  box-sizing: border-box;
-  font-size: 100%;
+html {
+	box-sizing: border-box;
+	font-size: 100%;
 }
 
-*,*::before,*::after{
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+.main-app {
+	width: 100vw;
+}
+
+.main {
+	border: 1px solid green;
+}
+
+.sidebar {
+	border: 1px solid blue;
+}
+
+.header {
+	border: 1px solid red;
 }

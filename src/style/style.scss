@@ -9,8 +9,12 @@
 @use "base/globals";
 
 // @use 'layout/';
+@use "layout/sidebar";
+@use "layout/header";
+@use "layout/main";
 
 // @use 'components/';
+@use "components/grid";
 
 // @use 'pages/';
 
