@@ -137,3 +137,19 @@
 		}
 	}
 }
+
+
+
+/// Interactions
+
+@mixin Button_interact{
+	cursor: pointer;
+
+	&:hover{
+		box-shadow: va(--shdw-sm);
+	}
+
+	&:active{
+		transform: translate(-2px);
+	}
+}

@@ -11,6 +11,14 @@ $breakpoints: (
 
 :root {
 	/// Fonts Later
+	
+	/// border radius
+	--brdr-rds: 0.5rem; 
+
+	/// gaps
+	--gap-sm: 0.5rem;
+	--gap-md: 1rem;
+	--gap-bg: 2rem;
 
 	/// margin
 
@@ -29,7 +37,7 @@ $breakpoints: (
 	--wdth-xsm: 2rem;
 	--wdth-sm: 4rem;
 	--wdth-md: 8rem;
-	--wdth-md: 16rem;
+	--wdth-lg: 16rem;
 	--wdth-bg: 24rem;
 	--wdth-xbg: 36rem;
 
@@ -38,7 +46,7 @@ $breakpoints: (
 	--hght-xsm: 2rem;
 	--hght-sm: 4rem;
 	--hght-md: 8rem;
-	--hght-md: 16rem;
+	--hght-lg: 16rem;
 	--hght-bg: 24rem;
 	--hght-xbg: 36rem;
 
