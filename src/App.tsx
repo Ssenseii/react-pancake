@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./style/style.scss";
@@ -18,13 +19,13 @@ function App() {
 			title: "APPS",
 			links: [
 				{ to: "/ecommerce", label: "E-Commerce", icon: Icons.cart },
-				{ to: "/travel", label: "Travel Agency" },
-				{ to: "/chat", label: "Chat" },
-				{ to: "/email", label: "Email" },
-				{ to: "/events", label: "Events" },
-				{ to: "/kanban", label: "Kanban" },
-				{ to: "/social", label: "Social" },
-				{ to: "/calendar", label: "Calendar" },
+				{ to: "/travel", label: "Travel Agency", icon: Icons.travel },
+				{ to: "/chat", label: "Chat", icon: Icons.chat },
+				{ to: "/email", label: "Email", icon: Icons.email },
+				{ to: "/events", label: "Events", icon: Icons.event },
+				{ to: "/kanban", label: "Kanban", icon: Icons.kanban },
+				{ to: "/social", label: "Social", icon: Icons.social },
+				{ to: "/calendar", label: "Calendar", icon: Icons.calendar },
 			],
 			dropdowns: [
 				{
@@ -37,19 +38,23 @@ function App() {
 						{ to: "/report-details", label: "Report Details" },
 						{ to: "/add-contact", label: "Add Contact" },
 					],
-					icon: Icons.cart,
+					icon: Icons.phone,
 				},
 				{
 					title: "Project Management",
 					links: [
-						{ to: "/create-new", label: "Create New" },
-						{ to: "/project-list-view", label: "Project List View" },
-						{ to: "/project-card-view", label: "Project Card View" },
-						{ to: "/project-board-view", label: "Project Board View" },
-						{ to: "/todo-list", label: "Todo List" },
-						{ to: "/project-details", label: "Project Details" },
+						{ to: "/create-new", label: "Create New", icon: Icons.plus },
+						{ to: "/project-list-view", label: "Project List View", icon: Icons.view },
+						{ to: "/project-card-view", label: "Project Card View", icon: Icons.view },
+						{
+							to: "/project-board-view",
+							label: "Project Board View",
+							icon: Icons.view,
+						},
+						{ to: "/todo-list", label: "Todo List", icon: Icons.list },
+						{ to: "/project-details", label: "Project Details", icon: Icons.details },
 					],
-					icon: Icons.cart,
+					icon: Icons.project,
 				},
 			],
 		},
@@ -68,16 +73,24 @@ function App() {
 		},
 	];
 
+	/// States
+
+	const [isCollapsed, setIsCollapsed] = useState(false);
+
+	/// Toggles
+
+	const toggleSidebar = () => setIsCollapsed((prev) => !prev);
+
 	return (
 		<Router>
 			<div className="main-app">
 				<div className="col-xs-12">
-					<Header />
+					<Header toggleSidebar={toggleSidebar} />
 				</div>
 
 				<div className="row no-gutters w-full">
 					<div>
-						<Sidebar groups={groups} />
+						<Sidebar groups={groups} isCollapsed={isCollapsed} />
 					</div>
 
 					<main className="main">

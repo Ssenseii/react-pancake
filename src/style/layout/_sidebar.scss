@@ -6,19 +6,71 @@
 
 	min-width: 256px;
 
+	min-height: calc(100vh - 59px); /// header
+
+	transition: all 0.2s ease-in-out;
+
+	&.collapsed {
+		min-width: 48px;
+
+		padding-inline: 0;
+
+		h3 {
+			display: none;
+		}
+
+		.sidebar__group-dropdown,
+		.sidebar__group-dropdown-menu,
+		.sidebar__group-link {
+			justify-content: center;
+			text-align: center;
+
+			padding-inline: 0;
+
+			svg{
+				margin: 0;
+			}
+
+			.icon {
+				margin-right: 0rem;
+			}
+
+			.label {
+				display: none;
+			}
+
+			button{
+				justify-content: center;
+			}
+
+			.dropdown-toggle {
+				padding-inline: 0;
+				.label {
+					display: none;
+				}
+
+				svg:nth-child(3){
+					display: none;
+				}
+			}
+		}
+	}
+
 	&__group {
 		padding-block: 1rem;
 		padding-inline: 0.5rem;
 
 		h3 {
-			font-size: 12px;
+			font-size: 10px;
 			color: $Gray500;
 			margin-bottom: 0.5rem;
 		}
 
 		&-link {
 			color: $Gray800;
-			padding: 8px 16px;
+
+			padding-block: 0.25rem;
+			padding-inline: 0.5rem;
 
 			font-family: "Inter", sans-serif;
 			font-size: 13px;
@@ -29,8 +81,19 @@
 			align-items: center;
 			justify-content: flex-start;
 
+			border-radius: var(--brdr-rds);
+
+			&.active {
+				color: var(--accent);
+				background-color: $Red50;
+
+				svg {
+					color: var(--accent);
+				}
+			}
+
 			svg {
-				margin-right: 0.2rem;
+				margin-right: 0.5rem;
 				width: 18px;
 				color: $Gray900;
 				stroke-width: 1;
@@ -49,8 +112,7 @@
 				border-radius: var(--brdr-rds);
 
 				padding-block: 0.25rem;
-
-				padding-inline: 1rem;
+				padding-inline: 0.5rem;
 
 				display: flex;
 				flex-direction: row;
@@ -70,17 +132,16 @@
 
 				svg {
 					&:nth-child(1) {
-						margin-right: 0.2rem;
+						margin-right: 0.5rem;
 						width: 18px;
 						color: $Gray900;
 						stroke-width: 1;
 					}
 
-					&:nth-child(2) {
+					&:nth-child(3) {
 						margin-left: auto;
 						color: $Gray500;
-						width: 16px;
-                        stroke-width: 1;
+						stroke-width: 1;
 					}
 				}
 
@@ -97,12 +158,13 @@
 
 			&-menu {
 				background-color: $Gray50;
+				margin-block: 0.25rem;
 
-                .sidebar__group-link{
-                    &:hover{
-                        background-color: $Gray200;
-                    }
-                }
+				.sidebar__group-link {
+					&:hover {
+						background-color: $Gray200;
+					}
+				}
 			}
 		}
 	}

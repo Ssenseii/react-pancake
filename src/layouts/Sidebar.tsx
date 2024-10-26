@@ -22,72 +22,43 @@ interface Group {
 
 interface SidebarProps {
 	groups: Group[];
+	isCollapsed: boolean;
 }
 
-const arrow_up = () => {
-	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			strokeWidth="2"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-		>
-			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-			<path d="M6 15l6 -6l6 6" />
-		</svg>
-	);
-};
+const arrowIcon = (isOpen: boolean) => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="1"
+		strokeLinecap="round"
+		strokeLinejoin="round"
+	>
+		<path d="M6 9l6 6l6-6" transform={isOpen ? "rotate(180, 12, 12)" : ""} />
+	</svg>
+);
 
-const arrow_down = () => {
-	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			strokeWidth="2"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-		>
-			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-			<path d="M6 9l6 6l6 -6" />
-		</svg>
-	);
-};
-
-// Link Component
 const SidebarLink: FC<LinkItem> = ({ to, label, icon }) => (
 	<NavLink
 		to={to}
-		style={({ isActive }) => ({
-			color: isActive ? "var(--accent)" : "",
-		})}
-		className="sidebar__group-link"
+		className={({ isActive }) => `sidebar__group-link ${isActive ? "active" : ""}`}
 	>
 		{icon && <span className="icon">{icon}</span>}
-		{label}
+		<span className="label">{label}</span>
 	</NavLink>
 );
 
-// Dropdown Component
 const SidebarDropdown: FC<DropdownItem> = ({ title, links, icon }) => {
-	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [isOpen, setIsOpen] = useState(false);
 
 	return (
 		<div className="sidebar__group-dropdown">
-			<button
-				onClick={() => setIsOpen(!isOpen)}
-				className={isOpen ? "menu-open" : "menu-closed"}
-			>
+			<button onClick={() => setIsOpen(!isOpen)} className="dropdown-toggle">
 				{icon && <span className="icon">{icon}</span>}
-				{title} {isOpen ? arrow_up() : arrow_down()}
+				<span className="label">{title}</span>
+				{arrowIcon(isOpen)}
 			</button>
 			{isOpen && (
 				<div className="sidebar__group-dropdown-menu">
@@ -100,9 +71,7 @@ const SidebarDropdown: FC<DropdownItem> = ({ title, links, icon }) => {
 	);
 };
 
-// Group Component
 const SidebarGroup: FC<Group> = ({ title, links, dropdowns }) => (
-	// <div style={{ marginBottom: "16px" }}>
 	<div className="sidebar__group">
 		<h3>{title}</h3>
 		<div>
@@ -116,14 +85,15 @@ const SidebarGroup: FC<Group> = ({ title, links, dropdowns }) => (
 	</div>
 );
 
-// Sidebar Component
-const Sidebar: FC<SidebarProps> = ({ groups }) => (
-	// <div style={{ width: "250px", padding: "16px", borderRight: "1px solid #ccc" }}>
-	<div className="sidebar col-xs-2 col-md-12">
-		{groups.map((group) => (
-			<SidebarGroup key={group.title} {...group} />
-		))}
-	</div>
-);
+const Sidebar: FC<SidebarProps> = ({ groups, isCollapsed }) => {
+
+	return (
+		<div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
+			{groups.map((group) => (
+				<SidebarGroup key={group.title} {...group} />
+			))}
+		</div>
+	);
+};
 
 export default Sidebar;

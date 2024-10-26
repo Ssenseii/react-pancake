@@ -2,7 +2,11 @@ import React from "react";
 import logo from "../assets/images/logo.png";
 import placeholder from "../assets/images/logo-placeholder.png";
 
-const Header: React.FC = () => {
+interface Header {
+	toggleSidebar: () => void;
+}
+
+const Header: React.FC<Header> = ({toggleSidebar}) => {
 	return (
 		<header className="header">
 			{/* LOGO */}
@@ -11,7 +15,7 @@ const Header: React.FC = () => {
 					<img src={logo} alt="logo placeholder" />
 				</a>
 
-				<button>
+				<button onClick={toggleSidebar}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="24"
