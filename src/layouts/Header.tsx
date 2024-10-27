@@ -62,6 +62,23 @@ const Header: React.FC<Header> = ({toggleSidebar}) => {
 
 			<div className="header__actions">
 				<div className="header__actions-buttons">
+					<button className="header__actions-buttons-search">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						>
+							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+							<path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+							<path d="M21 21l-6 -6" />
+						</svg>
+					</button>
 					<button>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +132,7 @@ const Header: React.FC<Header> = ({toggleSidebar}) => {
 						</svg>
 					</button>
 				</div>
-				<div className="header__actions-user">
+				<button className="header__actions-user">
 					<div className="header__actions-user-photo">
 						<img src={placeholder} alt="profile picture" />
 					</div>
@@ -139,7 +156,7 @@ const Header: React.FC<Header> = ({toggleSidebar}) => {
 							<path d="M6 9l6 6l6 -6" />
 						</svg>
 					</div>
-				</div>
+				</button>
 			</div>
 		</header>
 	);

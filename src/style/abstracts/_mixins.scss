@@ -146,13 +146,17 @@
 
 @mixin Button_interact{
 	cursor: pointer;
-
+	transition: transform 50ms ease;
+	
 	&:hover{
-		box-shadow: va(--shdw-sm);
+		box-shadow: 0px 2px 2px 0px #00000018;
+		transform: translateY(-2px);
+		transition: transform 100ms ease;
 	}
-
+	
 	&:active{
-		transform: translate(-2px);
+		transition: transform 100ms ease;
+		transform: translate(-1px);
 	}
 }
 

@@ -1,4 +1,5 @@
 @use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 
 .header {
 	border-bottom: 1px solid $Gray300;
@@ -40,6 +41,8 @@
 				height: 24px;
 				color: $Gray500;
 			}
+
+			@include Button_interact;
 		}
 	}
 
@@ -68,25 +71,31 @@
 
 			background: transparent;
 			border: none;
-			padding: 0.25rem 0.5rem;
+			padding: 0.25rem 0.25rem;
 
 			outline: none;
 
-			font-size: 16px;
-            font-family: 'Inter', sans-serif;
-            color: $Gray500;
+			font-size: 14px;
+			font-family: "Inter", sans-serif;
+			color: $Gray500;
+
+			// &:focus > .header__search{
+			// 	background-color: $Gray50;
+			// 	color: $Gray900;
+			// 	border: 1px solid $Gray500;
+			// }
 		}
 
 		p {
 			margin-left: 4rem;
-			font-size: 14px;
+			font-size: 12px;
 			color: $Gray500;
 
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            justify-content: center;
-            gap: 0.2rem;
+			display: flex;
+			flex-direction: row;
+			align-items: flex-start;
+			justify-content: center;
+			gap: 0.2rem;
 		}
 	}
 
@@ -106,14 +115,25 @@
 
 			gap: var(--gap-md);
 
+			&-search {
+				display: none;
+			}
+
 			button {
 				background: transparent;
 				border: none;
 				outline: none;
+				cursor: pointer;
 
 				svg {
-					stroke-width: 2;
-					color: $Gray500;
+					width: 20px;
+					height: 20px;
+					stroke-width: 1;
+					color: $Gray800;
+
+					&:hover {
+						color: var(--accent);
+					}
 				}
 			}
 		}
@@ -124,6 +144,9 @@
 			align-items: center;
 			justify-content: center;
 			gap: var(--gap-sm);
+
+			background: transparent;
+			border: none;
 
 			&-photo {
 				width: 42px;
@@ -158,6 +181,66 @@
 
 				svg {
 					width: 16px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	.header {
+		&__search {
+			input {
+				width: 100px;
+			}
+		}
+
+		&__actions {
+			&-buttons {
+				padding-inline: 1rem;
+			}
+			&-user {
+				&-info {
+					display: none;
+				}
+
+				&-icon {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.header {
+		padding-inline: 0.5rem;
+
+		&__search {
+			display: none;
+			input {
+				width: 100%;
+			}
+			p {
+				display: none;
+			}
+		}
+
+		&__actions {
+			&-buttons {
+				padding-inline: 1rem;
+
+				&-search {
+					display: grid;
+				}
+			}
+			&-user {
+				&-info {
+					display: none;
+				}
+
+				&-icon {
+					display: none;
 				}
 			}
 		}
