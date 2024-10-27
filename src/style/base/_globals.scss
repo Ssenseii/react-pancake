@@ -18,11 +18,17 @@ html {
 
 .main-app {
 	width: 100vw;
+
+	&__container{
+		display: flex;
+		flex-direction: row;
+	}
 }
 
-// .main {
-// 	border: 1px solid green;
-// }
+.main {
+	width: 100%;
+	padding: 0.5rem;
+}
 
 // .sidebar {
 // 	border: 1px solid blue;

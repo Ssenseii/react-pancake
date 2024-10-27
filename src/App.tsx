@@ -7,14 +7,26 @@ import Icons from "./assets/icons";
 import Header from "./layouts/Header";
 import Sidebar from "./layouts/Sidebar";
 
-import Users from "./pages/Users";
-import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
-
+import DB_Ecommerce from "./components/dashboard/DB_Ecommerce"
 function App() {
 	// const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
 	const groups = [
+		{
+			title: "DASHBOARD",
+			links: [
+				{ to: "/dashboard/ecommerce", label: "E-Commerce", icon: Icons.cart },
+				{
+					to: "/dashboard/project-management",
+					label: "Project Management",
+					icon: Icons.paste,
+				},
+				{ to: "/dashboard/CRM", label: "CRM", icon: Icons.users },
+				{ to: "/dashboard/travel-agency", label: "Travel Agency", icon: Icons.travel },
+				{ to: "/dashboard/social-feed", label: "Social Feed", icon: Icons.social },
+			],dropdowns: [],
+		},
 		{
 			title: "APPS",
 			links: [
@@ -81,6 +93,10 @@ function App() {
 
 	const toggleSidebar = () => setIsCollapsed((prev) => !prev);
 
+	/// Data
+
+	
+
 	return (
 		<Router>
 			<div className="main-app">
@@ -88,7 +104,7 @@ function App() {
 					<Header toggleSidebar={toggleSidebar} />
 				</div>
 
-				<div className="row no-gutters w-full">
+				<div className="main-app__container">
 					<div>
 						<Sidebar groups={groups} isCollapsed={isCollapsed} />
 					</div>
@@ -96,8 +112,10 @@ function App() {
 					<main className="main">
 						<Routes>
 							<Route path="/" element={<Dashboard />} />
-							<Route path="/users" element={<Users />} />
-							<Route path="/profile" element={<Profile />} />
+
+							{/* // Dashboard // */}
+
+							<Route path="/dashboard/ecommerce" element={<DB_Ecommerce />}></Route>
 						</Routes>
 					</main>
 				</div>
