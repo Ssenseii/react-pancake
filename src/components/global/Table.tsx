@@ -1,17 +1,22 @@
 import React, { FC, useState, useMemo, ReactNode, ChangeEvent } from "react";
 
-
 export interface Column<T> {
 	header: string;
 	accessor: keyof T;
 	sortable?: boolean;
 	renderCell?: (value: T[keyof T], row: T) => ReactNode;
-	width?: string; // For column resizing
+	width?: string;
+}
+
+interface Action<T> {
+	label: string;
+	onClick: (id: T[keyof T]) => void;
 }
 
 interface TableProps<T> {
 	data: T[];
 	columns: Column<T>[];
+	actions?: Action<T>[];
 	sortable?: boolean;
 	filterable?: boolean;
 	pagination?: boolean;
@@ -24,6 +29,7 @@ interface TableProps<T> {
 export const Table: FC<TableProps<any>> = ({
 	data,
 	columns,
+	actions = [],
 	sortable = true,
 	filterable = false,
 	pagination = false,
@@ -110,7 +116,7 @@ export const Table: FC<TableProps<any>> = ({
 							<th className="table__header-cell">
 								<input type="checkbox" onChange={selectAllRows} />
 							</th>
-							{columns.map((col, index) => (
+							{columns.map((col) => (
 								<th
 									key={col.accessor as string}
 									className={`table__header-cell ${
@@ -129,6 +135,7 @@ export const Table: FC<TableProps<any>> = ({
 									)}
 								</th>
 							))}
+							{actions.length > 0 && <th className="table__header-cell">Actions</th>}
 						</tr>
 					</thead>
 					<tbody className="table__body">
@@ -148,6 +155,26 @@ export const Table: FC<TableProps<any>> = ({
 											: row[col.accessor]}
 									</td>
 								))}
+								{actions.length > 0 && (
+									<td className="table__cell">
+										<div className="table__actions">
+											<button className="table__actions-button">
+												Actions
+											</button>
+											<div className="table__actions-dropdown">
+												{actions.map((action, index) => (
+													<button
+														key={index}
+														className="table__actions-item"
+														onClick={() => action.onClick(row.id)}
+													>
+														{action.label}
+													</button>
+												))}
+											</div>
+										</div>
+									</td>
+								)}
 							</tr>
 						))}
 					</tbody>

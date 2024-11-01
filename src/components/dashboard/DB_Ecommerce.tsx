@@ -1,23 +1,28 @@
 import { FC } from "react";
 import PageTitle from "../global/PageTitle";
-import { Table, Column } from "../global/Table";
+import { Table } from "../global/Table";
 
-interface User {
-	id: number;
-	name: string;
-	email: string;
-}
-
-const userData: User[] = [
+const userData = [
 	{ id: 1, name: "Alice", email: "alice@example.com" },
 	{ id: 2, name: "Bob", email: "bob@example.com" },
 	{ id: 3, name: "Charlie", email: "charlie@example.com" },
+	{ id: 3, name: "Charlie", email: "charlie@example.com" },
+	{ id: 3, name: "Charlie", email: "charlie@example.com" },
+	{ id: 3, name: "Charlie", email: "charlie@example.com" },
+	{ id: 3, name: "Charlie", email: "charlie@example.com" },
+	{ id: 3, name: "Charlie", email: "charlie@example.com" },
 ];
 
-const userColumns: Column<User>[] = [
+const userColumns = [
 	{ header: "ID", accessor: "id", sortable: true },
 	{ header: "Name", accessor: "name", sortable: true },
 	{ header: "Email", accessor: "email" },
+];
+
+const userActions = [
+	{ label: "Delete", onClick: (id: number) => console.log(`Delete user with ID: ${id}`) },
+	{ label: "Edit", onClick: (id: number) => console.log(`Edit user with ID: ${id}`) },
+	{ label: "Clean", onClick: (id: number) => console.log(`Clean user with ID: ${id}`) },
 ];
 
 const DB_Ecommerce: FC = () => {
@@ -25,7 +30,7 @@ const DB_Ecommerce: FC = () => {
 		<div>
 			<div className="row">
 				<PageTitle
-					className="col-md-4"
+					className="col-md-4"  
 					pageTitle="Ecommerce Dashboard"
 					pageDescription="Here's what's going on at your business right now"
 				/>
@@ -34,9 +39,9 @@ const DB_Ecommerce: FC = () => {
 				<Table
 					data={userData}
 					columns={userColumns}
-					filterable
+					actions={userActions}
 					pagination
-					rowsPerPage={2}
+					filterable
 				/>
 			</div>
 		</div>
