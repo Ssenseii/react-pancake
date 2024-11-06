@@ -1,3 +1,5 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap");
 
 html {
@@ -17,9 +19,8 @@ html {
 }
 
 .main-app {
-	width: 100vw;
-
-	&__container{
+	
+	&__container {
 		display: flex;
 		flex-direction: row;
 	}
@@ -30,6 +31,49 @@ html {
 	padding: 0.5rem;
 }
 
-// .sidebar {
-// 	border: 1px solid blue;
-// }
+/* Components */
+
+.text_input {
+	min-width: 256px;
+	height: 36px;
+
+	padding-inline: 0.5rem;
+	border-radius: var(--brdr-rds);
+	border: 1px solid $Gray300;
+
+	font-family: "Inter", sans-serif;
+	font-size: 14px;
+
+	&:focus {
+		border: 1px solid $Gray500;
+		outline: $Gray500;
+	}
+
+}
+
+
+.input_error{
+	border: 1px solid $Red500;
+}
+
+.input_valid{
+	border: 1px solid $Green500;
+}
+
+
+
+.primary_button{
+	cursor: pointer;
+	padding: 0.5rem 1rem;
+	
+	font-size: 14px;
+
+	border: none;
+	border-radius: var(--brdr-rds);
+
+	background-color: var(--accent);
+	color: #ffffff;
+
+	@include Button_interact;
+}
+
