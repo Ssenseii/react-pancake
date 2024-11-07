@@ -28,7 +28,7 @@ html {
 
 .main {
 	width: 100%;
-	padding: 0.5rem;
+	padding: 1rem;
 }
 
 /* Components */
@@ -53,7 +53,7 @@ html {
 
 
 .input_error{
-	border: 1px solid $Red500;
+	border: 1px solid $Amber500;
 }
 
 .input_valid{
